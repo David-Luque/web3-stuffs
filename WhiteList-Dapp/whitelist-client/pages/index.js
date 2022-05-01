@@ -21,11 +21,13 @@ export default function Home() {
    * Returns a Provider or Signer object representing the Ethereum RPC with or without the
    * signing capabilities of metamask attached
    *
-   * A `Provider` is needed to interact with the blockchain - reading transactions, reading balances, reading state, etc.
+   * A `Provider` is needed to interact with the blockchain - 
+   * reading transactions, reading balances, reading state, etc.
    *
    * A `Signer` is a special type of Provider used in case a `write` transaction needs to be made to the blockchain, which involves the connected account
-   * needing to make a digital signature to authorize the transaction being sent. Metamask exposes a Signer API to allow your website to
-   * request signatures from the user using Signer functions.
+   * needing to make a digital signature to authorize the transaction being sent.
+   * Metamask exposes a Signer API to allow your website to request signatures from the user using Signer functions.
+   * 
    *
    * @param {*} needSigner - True if you need the signer, default false otherwise
    */
@@ -56,8 +58,7 @@ export default function Home() {
     try {
       // We need a Signer here since this is a 'write' transaction.
       const signer = await getProviderOrSigner(true);
-      // Create a new instance of the Contract with a Signer, which allows
-      // update methods
+      // Create a new instance of the Contract with a Signer, which allows update methods
       const whitelistContract = new Contract(
         WHITELIST_CONTRACT_ADDRESS,
         abi,
@@ -72,6 +73,7 @@ export default function Home() {
       // get the updated number of addresses in the whitelist
       await getNumberOfWhitelisted();
       setJoinedWhitelist(true);
+
     } catch (err) {
       console.error(err);
     }
@@ -95,6 +97,7 @@ export default function Home() {
       // call the numAddressesWhitelisted from the contract
       const _numberOfWhitelisted = await whitelistContract.numAddressesWhitelisted();
       setNumberOfWhitelisted(_numberOfWhitelisted);
+
     } catch (err) {
       console.error(err);
     }
@@ -121,6 +124,7 @@ export default function Home() {
         address
       );
       setJoinedWhitelist(_joinedWhitelist);
+
     } catch (err) {
       console.error(err);
     }
@@ -138,6 +142,7 @@ export default function Home() {
 
       checkIfAddressInWhitelist();
       getNumberOfWhitelisted();
+      
     } catch (err) {
       console.error(err);
     }
